@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper">
     <div class="title-wrapper">
-      <h1 class="title-style">ROCK PAPER SCISSOR</h1>
+      <h1 class="title-style"><a href="https://kamaludin.tech/">ROCK PAPER SCISSOR</a></h1>
     </div>
     <div class="setting-wrapper">
       <Style
@@ -33,18 +33,11 @@
         :afterClick="afterClick"
       />
     </div>
-    <div
-      class="border-2 border-gray-400 py-8 space-y-2"
-      v-if="roundWinner != null"
-    >
-      <img class="w-1/3 mx-auto" :src="imageResource" alt="Winner and loser" />
-      <div class="text-center">
-        <p class="text-2xl font-bold">{{ computerScore }} : {{ humanScore }}</p>
-        <p class="text-xl font-bold">
-          YOU {{ roundWinner === "human" ? "WIN" : "LOSE" }}
-        </p>
-      </div>
-    </div>
+    <RoundResult
+      :roundWinner="roundWinner"
+      :computerScore="computerScore"
+      :humanScore="humanScore"
+    />
   </div>
 </template>
 
@@ -52,8 +45,9 @@
 import Style from "./components/Style";
 import Round from "./components/Round";
 import Arena from "./components/Arena";
-import Scoreboard from "./components/Scoreboard.vue";
-import Controller from "./components/Controller.vue";
+import Scoreboard from "./components/Scoreboard";
+import Controller from "./components/Controller";
+import RoundResult from "./components/RoundResult";
 
 export default {
   name: "App",
@@ -63,6 +57,7 @@ export default {
     Scoreboard,
     Arena,
     Controller,
+    RoundResult,
   },
   data() {
     return {
@@ -76,15 +71,10 @@ export default {
       ],
       rounds: ["1", "3", "5", "7"],
       hands: ["rock", "paper", "scissor"],
-
-      // Current active
       activeStyle: "flat",
       activeRound: "3",
-
       computerHand: "rock.png",
       humanHand: "rock.png",
-
-      // winningplayer: 'human', 'computer', null
       turnWinner: null,
       roundWinner: null,
       humanScore: 0,
@@ -114,13 +104,10 @@ export default {
       this.humanHand = humanChoice + ".png";
 
       let computerChoice =
-      this.hands[Math.floor(Math.random() * this.hands.length)];
-      console.log(computerChoice);
+        this.hands[Math.floor(Math.random() * this.hands.length)];
       let getWinner = this.chooseWinner(computerChoice, humanChoice);
-      // this time for wrap
       setTimeout(() => {
         this.computerHand = computerChoice + ".png";
-        // Jika human menang
         if (getWinner == "win") {
           this.turnWinner = "human";
           this.humanScore++;
@@ -166,13 +153,6 @@ export default {
       }, 150);
     },
   },
-  computed: {
-    imageResource: function () {
-      return this.roundWinner == "human"
-        ? "https://ik.imagekit.io/n0t5masg5jg/rockpaperscissor/win__1__kmEghbVs6w.png"
-        : "https://ik.imagekit.io/n0t5masg5jg/rockpaperscissor/lose_6oXrTA7dLH5H.png";
-    },
-  },
 };
 </script>
 
@@ -182,7 +162,7 @@ export default {
 }
 
 .title-wrapper {
-  @apply w-max border-b-4 border-gray-600 hover:border-gray-700 text-gray-600 hover:text-gray-700 cursor-pointer mb-2;
+  @apply flex items-center space-x-2 w-max border-b-4 border-gray-600 hover:border-gray-700 text-gray-600 hover:text-gray-700 cursor-pointer mb-2;
 }
 
 .title-style {
