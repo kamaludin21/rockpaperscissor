@@ -21,20 +21,17 @@ export default {
   components: {
     Title,
   },
-  data() {
-    return {
-      activeStyle: "flat",
-    };
-  },
   props: {
+    activeStyle: String,
     styles: Object,
   },
   methods: {
     clickStyle: function (style) {
-      this.activeStyle = style;
+      //[1.a] for send data onclick to parent
       this.$emit("change-image-style", style);
     },
   },
+  emits: ["change-image-style"]
 };
 </script>
 

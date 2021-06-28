@@ -5,7 +5,7 @@
       <div
         class="style-button"
         :class="[activeRound == round ? 'active' : 'inactive']"
-        @click="clickStyle(round)"
+        @click="clickRound(round)"
       >
         <p class="style-text text-center">{{ round }}</p>
       </div>
@@ -21,13 +21,15 @@ export default {
   components: {
     Title,
   },
-  data() {
-    return {
-      activeRound: 3,
-    };
-  },
   props: {
+    activeRound: String,
     rounds: Object,
   },
+  methods: {
+    clickRound: function(round) {
+      this.$emit("change-round", round);
+    }
+  },
+  emits: ["change-round"]
 };
 </script>
