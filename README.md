@@ -3,11 +3,11 @@
 Simple game rock paper scissor with round and color theme. Build with vuejs and tailwindcss.
 
 ## Demo
-[Demo](https://rockpaperscissor.stackblitz.io/)
+[Demo](https://vibrant-hopper-79e8e9.netlify.app/) at netlify
 
 ## Screenshot
 
-![App Screenshot](https://ik.imagekit.io/n0t5masg5jg/rockpaperscissor/Screenshot_2021-06-25_072431_SG5f_Uwe6.jpg)
+![App Screenshot](https://ik.imagekit.io/n0t5masg5jg/rockpaperscissor/overview_app_cHVRWpqKofNy.png)
 
 ### Install
 
